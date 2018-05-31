@@ -1,6 +1,4 @@
-package test;
-
-import org.apache.http.HttpConnection;
+package test.io;
 
 import java.io.*;
 import java.net.HttpURLConnection;
