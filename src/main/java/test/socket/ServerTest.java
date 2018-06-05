@@ -1,9 +1,6 @@
 package test.socket;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -17,12 +14,12 @@ public class ServerTest {
 
         try {
             ss = new ServerSocket(8888);
-            while (true) {
-                Socket s1 = ss.accept();
-                new Thread(new HandleServerResponseMessage(s1));
-                PrintWriter pw = new PrintWriter(new OutputStreamWriter(s1.getOutputStream()));
-                pw.write("已接收");
-            }
+                while(true) {
+                    Socket s1 = ss.accept();
+                    new Thread(new HandleServerResponseMessage(s1)).start();
+                    PrintWriter pw = new PrintWriter(s1.getOutputStream(), true);
+                    pw.println("Socket已连接");
+                }
         } catch (IOException e) {
             e.printStackTrace();
         }

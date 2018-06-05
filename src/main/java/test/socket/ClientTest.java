@@ -1,11 +1,9 @@
 package test.socket;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  * Created by jiahang Lee on 2018/6/1.
@@ -18,21 +16,30 @@ public class ClientTest {
             Socket client = new Socket("127.0.0.1",8888);
             new Thread(new HandleServerResponseMessage(client)).start();
             System.out.println("~接收消息已经交给其他线程处理");
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            PrintWriter pw = new PrintWriter(client.getOutputStream());
+            PrintWriter pw = new PrintWriter(client.getOutputStream(),true);
             StringBuffer msg = new StringBuffer();
             String s = "";
-            while((s = br.readLine()) != null){
-                msg.append(s);
+
+//                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//                s = br.readLine();
+//                    System.out.println(s);
+//                    msg.append(s);
+//                    br.close();
+            Scanner scanner =new Scanner(System.in);//键盘输入
+            while(scanner.hasNextLine()){
+                pw.println(scanner.nextLine());//将从键盘输入的数据发送出去
+                System.out.println("已发送消息");
             }
-            pw.write(String.valueOf(msg));
-            System.out.println("已发送消息");
-            br.close();
-            pw.close();
+
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
     }
+
 }
+

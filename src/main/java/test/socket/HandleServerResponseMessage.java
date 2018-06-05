@@ -3,8 +3,8 @@ package test.socket;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.Scanner;
 
-import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte0.runnable;
 
 /**
  * Created by jiahang Lee on 2018/6/1.
@@ -17,15 +17,17 @@ public class HandleServerResponseMessage implements Runnable{
     }
 
     public void run(){
+
         try {
-            InputStream is = socket.getInputStream();
-            byte[] buffer = new byte[1024];
-            int length = 0;
-            StringBuffer s = new StringBuffer();
-            while( (length = is.read(buffer,0,buffer.length)) != -1){
-                s.append(new String(buffer));
-            }
-            System.out.println("接收到: "+s);
+            Scanner scanner = new Scanner(socket.getInputStream());
+            String str = null;
+            while(true){
+                while(scanner.hasNext()){
+                str=scanner.nextLine();
+                System.out.println("接收到的消息："+str);
+            }}
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
