@@ -16,14 +16,14 @@ public class ServerTest {
             ss = new ServerSocket(8888);
                 while(true) {
                     Socket s1 = ss.accept();
-                    new Thread(new HandleServerResponseMessage(s1)).start();
+                    Thread t = new Thread(new HandleServerResponseMessage(s1));
+                    t.start();
                     PrintWriter pw = new PrintWriter(s1.getOutputStream(), true);
                     pw.println("Socket已连接");
                 }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 }
