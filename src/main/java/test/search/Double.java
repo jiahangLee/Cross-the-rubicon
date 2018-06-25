@@ -36,12 +36,63 @@ public class Double {
             System.out.print(i+",");
         }
     }
+    //选择排序
+    public static void selectSort(int[] a){
+        int i,j,min,temp;
+        for(i=0;i<a.length-1;i++){
+            min = i;
+            //这个j是随i变化的
+            for(j=i+1;j<a.length;j++){
+                if(a[min] > a[j]){
+                    min = j;
+                }
+            }
+            if(min != i) {
+                a[min] ^= a[i];
+                a[i] ^= a[min];
+                a[min] ^= a[i];
+            }
+        }
+        for(int k:a){
+            System.out.print(k+",");
+        }
+    }
+    public static void quickSort(int[] a,int left,int right){
+        int i = left;
+        int j = right;
+        if(left>right)
+            return;
+        int temp = a[left];
+        while(i != j){
+            while(i<j && a[j]>=temp){
+                j--;
+            }
+            while(i<j && a[i]<=temp){
+                i++;
+            }
+            if(i<j) {
+                a[j] ^= a[i];
+                a[i] ^= a[j];
+                a[j] ^= a[i];
+            }
+        }
+        a[left] = a[j];
+        a[j] = temp;
+        quickSort(a,left,i-1);
+        quickSort(a,i+1,right);
+
+    }
     public static void main(String[] args) {
 
 //        int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 11};
 //        System.out.print(search(a, 11));
 
-          int[] b = {3,15,35,1,6,89,65};
-          insertSort(b);
+          int[] b = {5,3,1};
+//          insertSort(b);
+//            selectSort(b);
+                quickSort(b,0,2);
+                for(int i:b){
+                    System.out.print(i+",");
+                }
     }
 }
