@@ -3,7 +3,7 @@ package test.search;
 /**
  * Created by lijia on 2018/6/23.
  */
-public class Double {
+public class Double1 {
     //二分查找法
     public static int search(int[] arr, int key) {
         int start = 0;
