@@ -1,4 +1,6 @@
-package data;
+package data.array;
+
+import data.array.Array;
 
 /**
  * @Auther: jiahangLee

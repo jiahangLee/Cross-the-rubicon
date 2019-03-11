@@ -1,4 +1,4 @@
-package data;
+package data.array;
 
 import java.util.Arrays;
 
@@ -53,6 +53,12 @@ public class Array<E> {
         if(index<0 || index>=size)
             throw new IllegalArgumentException("查询位置不正确");
         return data[index];
+    }
+    public E getLast() {
+        return get(size-1);
+    }
+    public E getFirst() {
+        return get(0);
     }
     public void set(int index,E e) {
         if(index<0 || index>size)
