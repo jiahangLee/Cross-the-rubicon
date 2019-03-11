@@ -8,18 +8,21 @@ package data.link;
  */
 public class LinkedList<E> {
 
-    private class Node{
+    private class Node {
         public E e;
         public Node next;
-        public Node(E e,Node node) {
+
+        public Node(E e, Node node) {
             this.e = e;
             this.next = next;
         }
+
         public Node(E e) {
-            this(e,null);
+            this(e, null);
         }
+
         public Node() {
-            this(null,null);
+            this(null, null);
         }
 
         @Override
@@ -33,32 +36,37 @@ public class LinkedList<E> {
 
     private Node head;
     private int size;
+
     public LinkedList() {
         head = null;
         size = 0;
     }
+
     public int getSize() {
         return size;
     }
+
     public Boolean isEmpty() {
         return size == 0;
     }
+
     public void addFirst(E e) {
 //        Node node = new Node();
 //        node.next = head;
 //        head = node;
-          head = new Node(e,head);
+        head = new Node(e, head);
     }
-    public void add(int index,E e) {
+
+    public void add(int index, E e) {
         //size指向下一次插入元素位置
-        if(index< 0 || index>size) {
+        if (index < 0 || index > size) {
             throw new IllegalArgumentException("插入链表位置不存在");
         }
-        if(index == 0){
+        if (index == 0) {
             addFirst(e);
-        }else {
+        } else {
             Node prev = head;
-            for(int i=0;i<index-1;i++) {
+            for (int i = 0; i < index - 1; i++) {
                 prev = prev.next;
             }
             Node node = new Node(e);
@@ -68,7 +76,8 @@ public class LinkedList<E> {
             size++;
         }
     }
+
     public void addLast(E e) {
-        add(size,e);
+        add(size, e);
     }
 }
