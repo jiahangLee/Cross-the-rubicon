@@ -34,11 +34,11 @@ public class LinkedList<E> {
         }
     }
 
-    private Node head;
+    private Node dummyNode;
     private int size;
 
     public LinkedList() {
-        head = null;
+        dummyNode = new Node();
         size = 0;
     }
 
@@ -54,19 +54,16 @@ public class LinkedList<E> {
 //        Node node = new Node();
 //        node.next = head;
 //        head = node;
-        head = new Node(e, head);
+        add(0,e);
     }
 
     public void add(int index, E e) {
-        //size指向下一次插入元素位置
+        //size指向下一次插入元素位置,就是元素数量
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("插入链表位置不存在");
         }
-        if (index == 0) {
-            addFirst(e);
-        } else {
-            Node prev = head;
-            for (int i = 0; i < index - 1; i++) {
+            Node prev = dummyNode;
+            for (int i = 0; i < index; i++) {
                 prev = prev.next;
             }
             Node node = new Node(e);
@@ -74,10 +71,83 @@ public class LinkedList<E> {
             prev.next = node;
 //            prev.next = new Node(e,prev.next);
             size++;
-        }
+
     }
 
     public void addLast(E e) {
         add(size, e);
+    }
+
+    public E get(int index) {
+        if(index < 0 || index >= size) {
+            throw new IllegalArgumentException("获取链表元素的位置不正确");
+        }
+        Node cur = dummyNode.next;
+        for(int i = 0;i < index;i++) {
+            cur = cur.next;
+        }
+        return cur.e;
+    }
+    public E getFirst(){
+        return get(0);
+    }
+    public E getLast() {
+        return get(size-1);
+    }
+    public void set(int index,E e) {
+        if(index < 0 || index >= size) {
+            throw new IllegalArgumentException("修改链表位置不正确");
+        }
+        Node cur = dummyNode.next;
+        for(int i = 0;i < index;i++) {
+            cur = cur.next;
+        }
+        cur.e = e;
+    }
+    public boolean contains(E e) {
+        Node cur = dummyNode.next;
+        while(cur != null){
+            if(cur.e.equals(e))
+                return true;
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+//        return "LinkedList{" +
+//                "dummyNode=" + dummyNode +
+//                ", size=" + size +
+//                '}';
+//    }
+        StringBuffer stringBuffer = new StringBuffer();
+        Node cur = dummyNode.next;
+        while (cur != null) {
+            stringBuffer.append(cur.e+"->");
+            cur = cur.next;
+        }
+        stringBuffer.append("null");
+        return stringBuffer.toString();
+    }
+    public E remove(int index) {
+        if(index < 0 || index >= size) {
+            throw new IllegalArgumentException("删除链表位置不正确");
+        }
+        Node prev = dummyNode;
+        for(int i = 0;i < index;i++) {
+            prev = prev.next;
+        }
+        Node ret = prev.next;
+        prev.next = ret.next;
+        ret.next = null;
+        size --;
+        return ret.e;
+    }
+    public E removeFirst() {
+        return remove(0);
+    }
+    public E removeLast() {
+        return remove(size-1);
     }
 }
