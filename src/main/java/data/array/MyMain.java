@@ -31,7 +31,7 @@ public class MyMain {
 //        arr.removeFirst();
 //        System.out.println(arr);
 
-        Array<Integer> arr = new Array<Integer>(10);
+        Array<Integer> arr = new Array<>(10);
         for(int i=0;i < 10;i++) {
             arr.addLast(i);
         }
