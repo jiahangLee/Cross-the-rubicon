@@ -10,7 +10,7 @@ public class Test1 {
 
     public static void main(String[] args) {
 
-        ArrayQueue<Integer> queue = new ArrayQueue<>();
+        LoopQueue<Integer> queue = new LoopQueue<>();
         for(int i=0;i<12;i++){
             queue.enqueue(i);
             System.out.println(queue);
